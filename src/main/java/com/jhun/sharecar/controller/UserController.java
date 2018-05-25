@@ -140,7 +140,7 @@ public class UserController {
         /*用户未登录，无法请求个人中心*/
         User currentUser = (User) request.getSession().getAttribute(Const.CURRENT_USER);
         if (currentUser == null) {
-            return "/index";
+            return "redirect:/index";
         }
         /*访问用户存在*/
         User user = iUserService.getUserById(userId);

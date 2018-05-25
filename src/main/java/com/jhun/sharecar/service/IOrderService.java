@@ -9,5 +9,7 @@ import com.jhun.sharecar.pojo.User; /**
 public interface IOrderService {
     Result addOrder(Order order, Integer carId,String name, User user);
 
-    Result getOrderList(Integer pageNum, Integer pageSize, String orderNumber);
+    Result getOrderList(Integer pageNum, Integer pageSize, String orderNumber,Integer userId);
+
+    int updateOrderStatus(String orderNumber, Integer userId, Integer orderStatus);
 }

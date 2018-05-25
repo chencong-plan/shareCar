@@ -63,7 +63,7 @@ public class OrderCarController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public Result addCar(Order order,Integer carId,String name, HttpServletRequest request) {
+    public Result addCar(Order order, Integer carId, String name, HttpServletRequest request) {
         User currentUser = (User) request.getSession().getAttribute(Const.CURRENT_USER);
         if (currentUser == null) {
             return new Result(Const.ResponseCode.NEED_LOGIN, "用户未登录");
@@ -71,18 +71,44 @@ public class OrderCarController {
         order.setUserId(currentUser.getId());
 //        System.out.println(order);
 //        System.out.println(carId);
-        Result result = iOrderService.addOrder(order,carId,name,currentUser);
+        Result result = iOrderService.addOrder(order, carId, name, currentUser);
         return result;
     }
 
     @RequestMapping("/list")
     @ResponseBody
     public Result list(
-            @RequestParam(value = "orderNumber",required = false,defaultValue = "") String orderNumber,
-            @RequestParam(value = "pageNum",required = false,defaultValue = "1")Integer pageNum,
-            @RequestParam(value = "pageSize",required = false,defaultValue = "10") Integer pageSize){
-        Result result = iOrderService.getOrderList(pageNum,pageSize, orderNumber);
+            @RequestParam(value = "orderNumber", required = false, defaultValue = "") String orderNumber,
+            @RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
+            @RequestParam(value = "userId", required = false, defaultValue = "") Integer userId) {
+        Result result = iOrderService.getOrderList(pageNum, pageSize, orderNumber, userId);
         return result;
+    }
+
+    /**
+     * 修改订单状态
+     *
+     * @param orderNumber
+     * @param userId
+     * @param orderStatus
+     * @return
+     */
+    @RequestMapping("/update")
+    @ResponseBody
+    public Result updateOrderStatus(@RequestParam(value = "orderNumber", required = true, defaultValue = "") String orderNumber,
+                                    @RequestParam(value = "userId", required = true, defaultValue = "") Integer userId,
+                                    @RequestParam(value = "status", required = false, defaultValue = "0") Integer orderStatus,
+                                    HttpServletRequest request) {
+        User currentUser = (User) request.getSession().getAttribute(Const.CURRENT_USER);
+        if (currentUser == null) {
+            return new Result(Const.ResponseCode.NEED_LOGIN, "用户未登录");
+        }
+        int count = iOrderService.updateOrderStatus(orderNumber, userId, orderStatus);
+        if (count > 0) {
+            return new Result(Const.ResponseCode.SUCCESS, "修改成功");
+        }
+        return new Result(Const.ResponseCode.ERROR, "修改失败");
 
     }
 

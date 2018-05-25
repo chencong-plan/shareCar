@@ -63,7 +63,8 @@ public class Const {
         /**
          * 不正常
          */
-        ABNORMAL(3, "不正常");
+        ABNORMAL(3, "不正常"),
+        CLOSED(10, "已关闭");
         private int code;
         private String msg;
 

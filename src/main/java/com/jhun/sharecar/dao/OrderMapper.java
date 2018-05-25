@@ -12,6 +12,7 @@ import java.util.List;
 public interface OrderMapper {
     int insertOrder(Order orderResult);
 
-    List<Order> selectOrderList(@Param("orderNumber") String orderNumber);
+    List<Order> selectOrderList(@Param("orderNumber") String orderNumber, @Param("userId") Integer userId);
 
+    int updateOrderStatus(@Param("orderNumber") String orderNumber, @Param("userId") Integer userId, @Param("orderStatus") Integer orderStatus);
 }

@@ -60,17 +60,22 @@ public class OrderServiceImpl implements IOrderService {
      *
      * @param pageNum
      * @param pageSize
-     * @param orderNum
+     * @param orderNumber
      * @return
      */
     @Override
-    public Result getOrderList(Integer pageNum, Integer pageSize, String orderNumber) {
+    public Result getOrderList(Integer pageNum, Integer pageSize, String orderNumber, Integer userId) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Order> orderList = orderMapper.selectOrderList(orderNumber);
+        List<Order> orderList = orderMapper.selectOrderList(orderNumber, userId);
         List<OrderVo> orderVoList = assertOrderVo(orderList);
         PageInfo pageResult = new PageInfo<>(orderList);
         pageResult.setList(orderVoList);
-        return  new Result<>(Const.ResponseCode.SUCCESS,"查询成功",pageResult);
+        return new Result<>(Const.ResponseCode.SUCCESS, "查询成功", pageResult);
+    }
+
+    @Override
+    public int updateOrderStatus(String orderNumber, Integer userId, Integer orderStatus) {
+        return orderMapper.updateOrderStatus(orderNumber, userId, orderStatus);
     }
 
     /**
@@ -93,8 +98,8 @@ public class OrderServiceImpl implements IOrderService {
             orderVo.setPrePay(order.getPrePay());
             orderVo.setOrderPlace(order.getOrderPlace());
             orderVo.setReturnPlace(order.getReturnPlace());
-            orderVo.setOrderTime(DateTimeUtil.dateToStr(order.getOrderTime()));
-            orderVo.setEndTime(DateTimeUtil.dateToStr(order.getEndTime()));
+            orderVo.setOrderTime(DateTimeUtil.dateToStr(order.getOrderTime(), "yyyy-MM-dd HH:mm"));
+            orderVo.setEndTime(DateTimeUtil.dateToStr(order.getEndTime(), "yyyy-MM-dd HH:mm"));
             /*订单状态*/
             orderVo.setOrderStatus(assertOrderStatus(order.getOrderStatus()));
 
@@ -156,6 +161,8 @@ public class OrderServiceImpl implements IOrderService {
             result = Const.OrderStatus.NORMAL.getMsg();
         } else if (Const.OrderStatus.ABNORMAL.getCode() == code) {
             result = Const.OrderStatus.ABNORMAL.getMsg();
+        } else if (Const.OrderStatus.CLOSED.getCode() == code) {
+            result = Const.OrderStatus.CLOSED.getMsg();
         } else {
             result = "订单状态码异常";
         }
