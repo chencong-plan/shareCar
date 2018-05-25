@@ -42,4 +42,6 @@ public interface UserMapper {
 
     int updateUserPassword(@Param("id") int id, @Param("role") int role, @Param("password") String password);
 
+    int updateUserInfo(@Param("id") Integer id, @Param("type") String type, @Param("value") String value);
+
 }

@@ -38,9 +38,9 @@
 
 <div class="w">
     <ul class="menu-ul">
-        <li><a class="on" href="#">首页</a></li>
+        <li><a class="menu-ul-li" href="#">首页</a></li>
         <%--<li><a href="">汽车资讯</a></li>--%>
-        <li><a class="menu-ul-li" href="">预约汽车</a></li>
+        <%--<li><a class="menu-ul-li" href="">预约汽车</a></li>--%>
         <li><a class="menu-ul-li" href="${basePath}/user/${current_user.id}">用户中心</a></li>
         <li><a class="menu-ul-li" href="">关于我们</a></li>
         <li><a class="menu-ul-li" href="${basePath}/user/login">登录</a></li>

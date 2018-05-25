@@ -52,39 +52,70 @@
 
     <insert id="insert">
         insert into sharecar_user (
-          <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List"/>
         )
         VALUES (
-          #{id},#{username},#{password},#{email},#{phone},#{role},#{realName},#{gender},#{born},#{idCard},#{driverCardType},#{homeAddress}
+        #{id},#{username},#{password},#{email},#{phone},#{role},#{realName},#{gender},#{born},#{idCard},#{driverCardType},#{homeAddress}
         )
     </insert>
 
     <update id="updateById">
-        update sharecar_user set
-            username = #{username},
-            password = #{password},
-            email = #{email},
-            phone = #{phone},
-            role = #{role},
-            real_name = #{realName},
-            born = #{born},
-            id_card = #{idCard},
+        UPDATE sharecar_user
+        SET
+            username         = #{username},
+            password         = #{password},
+            email            = #{email},
+            phone            = #{phone},
+            role             = #{role},
+            real_name        = #{realName},
+            born             = #{born},
+            id_card          = #{idCard},
             driver_card_type = #{driverCardType},
-            home_address = #{homeAddress}
-        where id = #{id}
+            home_address     = #{homeAddress}
+        WHERE id = #{id}
     </update>
 
     <select id="selectUserListByRole" resultType="User">
-        select <include refid="Base_Column_List"/> from sharecar_user where role = #{role}
-            and ( username  like "%"#{keyword}"%" or real_name like "%"#{keyword}"%" )
+        select
+        <include refid="Base_Column_List"/>
+        from sharecar_user where role = #{role}
+        and ( username like "%"#{keyword}"%" or real_name like "%"#{keyword}"%" )
     </select>
 
     <delete id="delUser">
-        DELETE from sharecar_user where id = #{id} and role = #{role}
+        DELETE FROM sharecar_user
+        WHERE id = #{id} AND role = #{role}
     </delete>
 
     <update id="updateUserPassword">
-        update sharecar_user set password = #{password} where id = #{id} and role = #{role}
+        UPDATE sharecar_user
+        SET password = #{password}
+        WHERE id = #{id} AND role = #{role}
+    </update>
+
+    <update id="updateUserInfo">
+        update sharecar_user
+        <set>
+            <if test="type != null and type =='realName'">
+                real_name = #{value}
+            </if>
+            <if test="type != null and type == 'username'">
+                username = #{value}
+            </if>
+            <if test="type != null and type =='password'">
+                password = #{value}
+            </if>
+            <if test="type != null and type == 'homeAddress' ">
+                home_address = #{value}
+            </if>
+            <if test="type != null and type == 'driverCardType'">
+                driver_card_type = #{value}
+            </if>
+            <if test="type != null and type == 'gender'">
+                gender = #{value}
+            </if>
+        </set>
+        where id = #{id}
     </update>
 
 

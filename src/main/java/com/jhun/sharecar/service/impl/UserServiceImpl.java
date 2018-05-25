@@ -97,4 +97,14 @@ public class UserServiceImpl implements IUserService {
     public User getUserById(Integer userId) {
         return userMapper.selectById(userId);
     }
+
+    @Override
+    public Result updateUserInfo(User currentUser, String type, String value) {
+        int count = userMapper.updateUserInfo(currentUser.getId(),type,value);
+        if (count > 0){
+            return new Result(Const.ResponseCode.SUCCESS,"更新成功");
+        }else{
+            return new Result(Const.ResponseCode.ERROR,"更新失败");
+        }
+    }
 }

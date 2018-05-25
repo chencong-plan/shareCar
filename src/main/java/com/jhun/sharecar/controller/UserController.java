@@ -156,6 +156,25 @@ public class UserController {
     }
 
     /**
+     * 更新用户信息，根据type选择将要更新的属性
+     * @param type
+     * @param value
+     * @param request
+     * @return
+     */
+    @RequestMapping("/update")
+    @ResponseBody
+    public Result updateUser(@RequestParam(value = "type") String type,
+                             @RequestParam(value = "value") String value,
+                             HttpServletRequest request){
+        User currentUser = (User) request.getSession().getAttribute(Const.CURRENT_USER);
+        if (currentUser == null){
+            return new Result(Const.ResponseCode.NEED_LOGIN,"用户未登录");
+        }
+        return iUserService.updateUserInfo(currentUser,type,value);
+    }
+
+    /**
      * 如果/user/后面没有接上userId或者userId错误都返回到首页
      *
      * @return

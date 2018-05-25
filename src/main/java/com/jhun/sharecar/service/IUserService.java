@@ -54,4 +54,6 @@ public interface IUserService {
     int resetPassword(int id, int role);
 
     User getUserById(Integer userId);
+
+    Result updateUserInfo(User currentUser, String type, String value);
 }

@@ -13,9 +13,33 @@ var page = {
         orderNumber: ''
     },
     init: function () {
+        this.initMap();
         this.bindEvent();
         this.reloadOrder(page.pageInfo);
 
+    },
+    /**
+     * 加载地图信息
+     */
+    initMap: function () {
+        var windowsArr = [];
+        var marker = [];
+        AMap.plugin(['AMap.Autocomplete', 'AMap.PlaceSearch'], function () {
+            var autoOptions = {
+                city: "北京", //城市，默认全国
+                input: "homeAddress"//使用联想输入的input的id
+            };
+            autocomplete = new AMap.Autocomplete(autoOptions);
+            var placeSearch = new AMap.PlaceSearch({
+                city: '北京',
+                map: map
+            });
+            AMap.event.addListener(autocomplete, "select", function (e) {
+                //TODO 针对选中的poi实现自己的功能
+                placeSearch.setCity(e.poi.adcode);
+                placeSearch.search(e.poi.name)
+            });
+        });
     },
     /**
      * 事件绑定
@@ -44,6 +68,60 @@ var page = {
             _this.pageInfo.userId = userId;
             /*修改订单状态*/
             _this.updateOrderStatus(_this.pageInfo);
+        });
+
+        /**
+         * 用户信息修改
+         */
+        $('.user-info-input').blur(function () {
+            var type = $(this).attr('id');
+            var value = $(this).val();
+            if (!util.validate(value, 'require')) {
+                /*未通过校验*/
+                $(this).addClass("error");
+            } else {
+                /*通过校验移除红色*/
+                $(this).removeClass("error");
+                _this.updateUserInfo(type,value);
+            }
+        });
+
+        /**
+         * 下拉框事件
+         */
+        $('.user-info-input-select').change(function () {
+            var type = $(this).attr('id');
+            var value =$(this).val();
+            console.log(type+":"+value);
+            if (!util.validate(value, 'require')) {
+                /*未通过校验*/
+                $(this).addClass("error");
+            } else {
+                /*通过校验移除红色*/
+                $(this).removeClass("error");
+                _this.updateUserInfo(type,value);
+            }
+        });
+    },
+    /**
+     * 更新用户信息
+     * @param type
+     * @param value
+     */
+    updateUserInfo: function (type, value) {
+        $.ajax({
+            url:'/user/update',
+            dataType:'json',
+            type:'get',
+            data:{
+                type:type,
+                value:value
+            },
+            success:function (res) {
+                console.log(res);
+            },error:function (error) {
+                console.log(error);
+            }
         });
     },
     /**
@@ -84,7 +162,7 @@ var page = {
                 userId: pageInfo.userId
             },
             success: function (res) {
-                console.log(res);
+                // console.log(res);
                 /*渲染模态框当中的订单详情*/
                 _this.renderUserInfoOrderHtml(res.data);
                 /*初始化分页*/
