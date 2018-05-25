@@ -1,0 +1,193 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#menu_header {
+    background-image: url(../img/headerBack.jpg);
+    width: 1080px;
+    height: 120px;
+    margin: 0 auto;
+}
+
+ul {
+    list-style: none;
+    margin-left: 500px;
+}
+
+li {
+    float: left;
+    text-align: center;
+    margin-top: -30px;
+}
+
+.menu-ul {
+    margin-bottom: 0;
+}
+
+.menu-ul-li {
+    text-decoration: none;
+    display: block;
+    background-color: #FFFACD;
+    line-height: 30px;
+    width: 100px;
+    margin-bottom: 1px;
+    text-indent: 10px;
+}
+
+.menu-ul-li:hover {
+    background-color: #f60;
+    line-height: 40px;
+    margin-top: -10px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #e7380d;
+}
+
+#menu_center {
+    background-color: #96CDCD;
+    /*postion: relative;*/
+    width: 1080px;
+    /*height: 600px;*/
+    margin: 0 auto;
+}
+
+.menu-floor {
+    background-color: #8B8378;
+    /*postion: relative;*/
+    width: 1080px;
+    /*height: 20px;*/
+    margin: 0 auto;
+}
+
+.header_info {
+    float: right;
+    margin-right: 60px;
+    margin-top: -16px;
+    color: #FFFAF0;
+}
+
+#headerTitle {
+    font-size: 20px;
+    color: #FFFAF0;
+    margin-left: 500px;
+    padding-top: 8px;
+}
+
+#logo {
+    float: left;
+}
+
+/*重写menu页面样式*/
+.w {
+    width: 1080px;
+    margin: 0 auto;
+}
+
+.menu-content {
+    width: 1080px;
+    margin: 0 auto;
+}
+
+.menu-content .menu-header {
+    height: 20px;
+}
+
+.menu-content .menu-wrap {
+    width: 1120px;
+    margin: 0 auto;
+}
+
+.menu-wrap .car-item {
+    float: left;
+    margin: 10px 10px 0 0;
+    width: 270px;
+    height: 280px;
+}
+
+.car-item .car-img {
+    margin: 0 auto;
+}
+
+.car-item img {
+    margin: 0 auto;
+    border-radius: 10px;
+    -moz-border-radius: 25px; /* Old Firefox */
+    height: 170px;
+    overflow: hidden;
+}
+
+.car-item .car-item-con {
+    margin: 0;
+}
+
+.car-item-con .car-pay-con {
+    height: 30px;
+    line-height: 30px;
+}
+
+.car-item-con .car-pay-con .car-pay {
+    font-size: 17px;
+    color: #e7380d;
+}
+
+.car-item-con .car-pay-con .car-pay-time {
+    font-size: 14px;
+    color: #666;
+    margin-left: 5px;
+}
+
+.car-item-con .car-pay-con .car-create-time {
+    font-size: 13px;
+    color: #666;
+    margin-left: 5px;
+}
+
+.car-item-con .car-label-info {
+    height: 40px;
+    line-height: 40px;
+}
+
+.car-label-info .car-product-name {
+    font-size: 13px;
+}
+
+.car-label-info span {
+    height: 14px;
+    line-height: 14px;
+    display: block;
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.car-item-con .car-name-con {
+    height: 30px;
+    line-height: 30px;
+}
+
+.car-item .car-name-con .car-name {
+    line-height: 20px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #777;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+

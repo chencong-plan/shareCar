@@ -1,0 +1,70 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jhun.sharecar.dao.CarMapper">
+
+    <resultMap id="BaseResultMap" type="com.jhun.sharecar.pojo.Car">
+        <constructor>
+            <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="car_type_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="product_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="image_url" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="operation" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="pay" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, car_type_id, name, product_name, image_url, operation, status, pay, create_time
+    </sql>
+
+
+    <insert id="insertCar">
+        insert into sharecar_car(
+        <include refid="Base_Column_List"/>
+        ) values (
+        #{id},#{carTypeId},#{name},#{productName},#{imageUrl},#{operation},#{status},#{pay},now()
+        )
+    </insert>
+
+    <select id="selectCar" resultType="com.jhun.sharecar.pojo.Car">
+        select
+        <include refid="Base_Column_List"/>
+        from sharecar_car where 1=1
+        <if test="status !=null and status != ''">
+            and status = #{status}
+        </if>
+        <if test="type == 'name'">
+            and name like "%"#{keyword}"%"
+        </if>
+        <if test="type == 'productName'">
+            and product_name like "%'#{keyword}'%"
+        </if>
+        <if test="type == 'operation'">
+            and operation like "%'#{keyword}'%"
+        </if>
+        order by pay desc
+    </select>
+
+    <select id="selectCarByStatus" resultType="com.jhun.sharecar.pojo.Car">
+        select
+        <include refid="Base_Column_List"/>
+        from sharecar_car where status = #{status}
+    </select>
+
+    <update id="updateCarStatus">
+        UPDATE sharecar_car
+        SET status = #{status}
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectCarById" resultType="com.jhun.sharecar.pojo.Car">
+        select
+        <include refid="Base_Column_List"/>
+        from sharecar_car where id =#{id}
+    </select>
+</mapper>

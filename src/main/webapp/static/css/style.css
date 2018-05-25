@@ -1,0 +1,135 @@
+@charset "UTF-8";
+#login_body{
+	magrin: 0px;
+	padding: 0px;
+	background-image: url(../img/back.jpg);
+}
+#img_check{
+	position:relative;  
+	bottom:-5px;
+	padding-left:4px
+	}
+	.a_div a{float:left;margin-left:100px;}
+	#uname,#upass{
+	width:200px;
+	height:16px;
+	margin-top:4px;}
+#div_1 {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 23%;
+	height: 300px;
+	margin: 0 auto;
+	padding: 5px;
+	text-align: center;
+	background-color: #C1FFC1;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	box-shadow: 1px 1px 5px 5px #888888;
+	border-radius: 25px;
+}
+
+.d1 {
+	margin-top: 10px;
+	width: 250px;
+	height: 30px;
+}
+
+select {
+	margin-top: 3px;
+	width: 205px;
+	margin-left: 9px;
+}
+
+marquee {
+	behavior: alternate;
+}
+
+.header {
+	height: 100px;
+}
+#re_form {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 38%;
+	height: 400px;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	box-shadow: 1px 1px 5px 5px #888888;
+	border-radius: 25px;
+	margin: 0 auto;
+}
+
+
+
+.gender {
+	width: 50px;
+}
+
+#re_tr {
+	margin-left: 10px;
+}
+
+#re_table {
+	padding-top: 30px;
+	padding-left: 50px;
+}
+
+#header {
+	postion: relative;
+	text-align: center;
+	background-color: #EEE9E9;
+	font-size: 48px;
+	width: 100%;
+	height: 128px;
+}
+
+#register_body {
+	padding: 0;
+	margin: 0;
+	background-color: #EEB4B4;
+}
+
+.re_button {
+	text-align: center;
+}
+
+.re_btn {
+	width: 64px;
+	height: 32px;
+}
+.div_submit{
+	text-align:center;
+}
+#re_div1,#re_div2,#re_div3,#re_div4,#re_div5,#re_div6,#re_div7,#re_div8,#re_div9{
+font-family:宋体;
+font-size:8px;
+color:#FF4500;
+}
+* {
+	margin: 0;
+	paddding: 0;
+}
+#myDiv{
+	background-color:#FF4500;
+	width:200px;
+	height:16px;
+}
+
+
+
+
+/*登录页面的 错误提示信息*/
+.msg-error{
+	font-size: 14px;
+	color: #FF4500;
+}
+

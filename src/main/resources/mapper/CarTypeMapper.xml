@@ -1,0 +1,32 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jhun.sharecar.dao.CarTypeMapper">
+
+    <resultMap id="BaseResultMap" type="com.jhun.sharecar.pojo.CarType">
+        <constructor>
+            <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="car_type" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="price" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        </constructor>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, car_type,price
+    </sql>
+
+    <select id="selectCarType" resultType="com.jhun.sharecar.pojo.CarType">
+        select
+        <include refid="Base_Column_List"/>
+        from sharecar_car_type
+    </select>
+
+
+    <select id="selectCarTypeById" resultType="com.jhun.sharecar.pojo.CarType">
+        select
+        <include refid="Base_Column_List"/>
+        from sharecar_car_type where id = #{id}
+    </select>
+
+</mapper>
