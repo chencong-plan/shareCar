@@ -115,7 +115,7 @@
                         <span class="input-group-addon" id="home-address">
                             <i class="glyphicon glyphicon-credit-card"></i>
                         </span>
-                    <input type="text" class="form-control home-address" placeholder="家庭住址" name="home-address">
+                    <input type="text" class="form-control home-address" id="homeAddress" placeholder="家庭住址" name="home-address">
                 </div>
                 <br>
                 <div class="input-group">
@@ -139,6 +139,9 @@
 <script type="text/javascript" src="${basePath}/static/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 <script type="text/javascript" src="${basePath}/static/js/register.js"></script>
 <script type="text/javascript" src="${basePath}/static/js/util.js"></script>
+
+<script type="text/javascript"
+        src="https://webapi.amap.com/maps?v=1.4.2&key=a12d33be94f50f1fb9fe6dfe847a036a"></script>
 
 <script>
     $(".born-date").datetimepicker({

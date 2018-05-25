@@ -4,6 +4,10 @@
 * */
 $(function () {
 
+    /**
+     * 加载地图
+     */
+    map.initMap();
 
     /**
      * 异步校验用户名是否存在
@@ -187,4 +191,30 @@ var formValidate = function (formData) {
     result.status = true;
     result.msg = "验证通过";
     return result;
+};
+
+var map={
+    /**
+     * 加载地图信息
+     */
+    initMap: function () {
+        var windowsArr = [];
+        var marker = [];
+        AMap.plugin(['AMap.Autocomplete', 'AMap.PlaceSearch'], function () {
+            var autoOptions = {
+                city: "北京", //城市，默认全国
+                input: "homeAddress"//使用联想输入的input的id
+            };
+            autocomplete = new AMap.Autocomplete(autoOptions);
+            var placeSearch = new AMap.PlaceSearch({
+                city: '北京',
+                map: map
+            });
+            AMap.event.addListener(autocomplete, "select", function (e) {
+                //TODO 针对选中的poi实现自己的功能
+                placeSearch.setCity(e.poi.adcode);
+                placeSearch.search(e.poi.name)
+            });
+        });
+    }
 };
